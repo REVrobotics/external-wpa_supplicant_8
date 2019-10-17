@@ -21,6 +21,7 @@ static int wpa_debug_syslog = 0;
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <errno.h>
 #include <stdio.h>
 
 static FILE *wpa_debug_tracing_file = NULL;
@@ -548,10 +549,12 @@ int wpa_debug_open_file(const char *path)
 		last_path = os_strdup(path);
 	}
 
+    int errnum;
 	out_file = fopen(path, "a");
 	if (out_file == NULL) {
+		errnum = errno;
 		wpa_printf(MSG_ERROR, "wpa_debug_open_file: Failed to open "
-			   "output file, using standard output");
+			   "output file %s code %d reason %s, using standard output", path, errnum, strerror( errnum ));
 		return -1;
 	}
 #ifndef _WIN32

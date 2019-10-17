@@ -192,6 +192,9 @@ int main(int argc, char *argv[])
 	os_memset(&params, 0, sizeof(params));
 	params.wpa_debug_level = MSG_INFO;
 
+	// Default path to ANDROID SD CARD - this doesn't work due to (permissions?)
+	//params.wpa_debug_file_path = "/sdcard/supplicant_log.txt";
+
 	iface = ifaces = os_zalloc(sizeof(struct wpa_interface));
 	if (ifaces == NULL)
 		return -1;
@@ -337,6 +340,8 @@ int main(int argc, char *argv[])
 			goto out;
 		}
 	}
+	
+	//wpa_printf(MSG_INFO, "Writing log to path %s", params.wpa_debug_file_path);
 
 	exitcode = 0;
 	global = wpa_supplicant_init(&params);

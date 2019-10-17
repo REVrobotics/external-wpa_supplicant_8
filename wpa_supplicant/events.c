@@ -2967,7 +2967,7 @@ static void wpa_supplicant_event_unprot_deauth(struct wpa_supplicant *wpa_s,
 					       struct unprot_deauth *e)
 {
 #ifdef CONFIG_IEEE80211W
-	wpa_printf(MSG_DEBUG, "Unprotected Deauthentication frame "
+	wpa_printf(MSG_INFO, "Unprotected Deauthentication frame "
 		   "dropped: " MACSTR " -> " MACSTR
 		   " (reason code %u)",
 		   MAC2STR(e->sa), MAC2STR(e->da), e->reason_code);
@@ -2980,7 +2980,7 @@ static void wpa_supplicant_event_unprot_disassoc(struct wpa_supplicant *wpa_s,
 						 struct unprot_disassoc *e)
 {
 #ifdef CONFIG_IEEE80211W
-	wpa_printf(MSG_DEBUG, "Unprotected Disassociation frame "
+	wpa_printf(MSG_INFO, "Unprotected Disassociation frame "
 		   "dropped: " MACSTR " -> " MACSTR
 		   " (reason code %u)",
 		   MAC2STR(e->sa), MAC2STR(e->da), e->reason_code);
@@ -3044,7 +3044,7 @@ static void wpas_event_disassoc(struct wpa_supplicant *wpa_s,
 	const u8 *ie = NULL;
 	size_t ie_len = 0;
 
-	wpa_dbg(wpa_s, MSG_DEBUG, "Disassociation notification");
+	wpa_dbg(wpa_s, MSG_INFO, "Disassociation notification");
 
 	if (info) {
 		addr = info->addr;
@@ -3052,12 +3052,12 @@ static void wpas_event_disassoc(struct wpa_supplicant *wpa_s,
 		ie_len = info->ie_len;
 		reason_code = info->reason_code;
 		locally_generated = info->locally_generated;
-		wpa_dbg(wpa_s, MSG_DEBUG, " * reason %u%s", reason_code,
+		wpa_dbg(wpa_s, MSG_INFO, " * reason %u%s", reason_code,
 			locally_generated ? " (locally generated)" : "");
 		if (addr)
-			wpa_dbg(wpa_s, MSG_DEBUG, " * address " MACSTR,
+			wpa_dbg(wpa_s, MSG_INFO, " * address " MACSTR,
 				MAC2STR(addr));
-		wpa_hexdump(MSG_DEBUG, "Disassociation frame IE(s)",
+		wpa_hexdump(MSG_INFO, "Disassociation frame IE(s)",
 			    ie, ie_len);
 	}
 
@@ -3068,7 +3068,7 @@ static void wpas_event_disassoc(struct wpa_supplicant *wpa_s,
 	}
 
 	if (wpa_s->ap_iface) {
-		wpa_dbg(wpa_s, MSG_DEBUG, "Ignore disassoc event in AP mode");
+		wpa_dbg(wpa_s, MSG_INFO, "Ignore disassoc event in AP mode");
 		return;
 	}
 #endif /* CONFIG_AP */
@@ -3098,7 +3098,7 @@ static void wpas_event_deauth(struct wpa_supplicant *wpa_s,
 	const u8 *ie = NULL;
 	size_t ie_len = 0;
 
-	wpa_dbg(wpa_s, MSG_DEBUG, "Deauthentication notification");
+	wpa_dbg(wpa_s, MSG_INFO, "Deauthentication notification");
 
 	if (info) {
 		addr = info->addr;
@@ -3106,14 +3106,14 @@ static void wpas_event_deauth(struct wpa_supplicant *wpa_s,
 		ie_len = info->ie_len;
 		reason_code = info->reason_code;
 		locally_generated = info->locally_generated;
-		wpa_dbg(wpa_s, MSG_DEBUG, " * reason %u%s",
+		wpa_dbg(wpa_s, MSG_INFO, " * reason %u%s",
 			reason_code,
 			locally_generated ? " (locally generated)" : "");
 		if (addr) {
-			wpa_dbg(wpa_s, MSG_DEBUG, " * address " MACSTR,
+			wpa_dbg(wpa_s, MSG_INFO, " * address " MACSTR,
 				MAC2STR(addr));
 		}
-		wpa_hexdump(MSG_DEBUG, "Deauthentication frame IE(s)",
+		wpa_hexdump(MSG_INFO, "Deauthentication frame IE(s)",
 			    ie, ie_len);
 	}
 
